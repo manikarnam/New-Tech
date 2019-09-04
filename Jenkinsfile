@@ -34,7 +34,7 @@ pipeline {
 
                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 
-                 def customImage = docker.build("jenkins4eval/jnlp-slave")
+                 def customImage = docker.build("maniengg/jenkins4evaljnlpslave")
 
                  customImage.push()
                  }
