@@ -37,6 +37,7 @@ pipeline {
                  def customImage = docker.build("maniengg/jenkins4evaljnlpslave")
 
                  customImage.push()
+                 customImage.pull()    
                  }
               }
             }
