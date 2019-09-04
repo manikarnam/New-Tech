@@ -29,6 +29,7 @@ pipeline {
      stages {
          stage ('Build && push'){
              steps {
+                 script{
                checkout scm
 
                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
@@ -36,6 +37,7 @@ pipeline {
                  def customImage = docker.build("jenkins4eval/jnlp-slave")
 
                  customImage.push()
+                 }
               }
             }
          }
