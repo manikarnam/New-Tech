@@ -15,15 +15,31 @@ pipeline {
         pollSCM('H/24 * * * *') // once a day in case some hooks are missed
     }
 
-    stages {
-        stage('Build Docker Image') {
-            steps {
-                deleteDir()
-                checkout scm
-                sh 'make build'
+    //stages {
+      //  stage('Build Docker Image') {
+        //    steps {
+          //      deleteDir()
+            //    checkout scm
+              //  sh 'make build'
+            //}
+       // }
+    //}
+    
+    
+     stages {
+         stage ('Build && push'){
+             steps {
+               checkout scm
+
+                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+
+                 def customImage = docker.build("jenkins4eval/jnlp-slave")
+
+                 customImage.push()
+              }
             }
-        }
-    }
+         }
+     }
 }
 
 // vim: ft=groovy
